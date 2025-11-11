@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html, body, #root {
+		height: 100%;
+	}
+	body {
+		@apply bg-bg text-text font-sans;
+	}
+}
+
+@layer components {
+	.container-padded {
+		@apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+	}
+	.card {
+		@apply bg-card rounded-xl shadow-soft border border-white/5;
+	}
+	.heading-xl {
+		@apply text-2xl sm:text-3xl font-semibold tracking-tight;
+	}
+	.heading-lg {
+		@apply text-xl sm:text-2xl font-semibold;
+	}
+	.heading-md {
+		@apply text-lg sm:text-xl font-semibold;
+	}
+}
+
+
