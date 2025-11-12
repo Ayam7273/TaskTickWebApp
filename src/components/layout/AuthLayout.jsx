@@ -13,7 +13,6 @@ export function AuthLayout() {
 						<img src={logoNormal} alt="TaskTick" className="h-8 w-8" />
 						<span className="text-xl font-semibold">TaskTick</span>
 					</Link>
-					<Button variant="ghost" onClick={toggle}>Theme</Button>
 				</div>
 				<div className="card p-6">
 					<Outlet />
