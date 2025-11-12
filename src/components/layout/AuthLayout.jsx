@@ -1,6 +1,7 @@
 import { Outlet, Link } from 'react-router-dom';
 import Button from '../ui/Button.jsx';
 import { useTheme } from '../../context/ThemeContext.jsx';
+import logoNormal from '../../assets/tasktick-logo-normal.svg';
 
 export function AuthLayout() {
 	const { toggle } = useTheme();
@@ -9,7 +10,7 @@ export function AuthLayout() {
 			<div className="w-full max-w-md p-6">
 				<div className="flex items-center justify-between mb-6">
 					<Link className="flex items-center gap-3" to="/onboarding">
-						<img src="/src/assets/tasktick-logo-normal.svg" alt="TaskTick" className="h-8 w-8" />
+						<img src={logoNormal} alt="TaskTick" className="h-8 w-8" />
 						<span className="text-xl font-semibold">TaskTick</span>
 					</Link>
 					<Button variant="ghost" onClick={toggle}>Theme</Button>
