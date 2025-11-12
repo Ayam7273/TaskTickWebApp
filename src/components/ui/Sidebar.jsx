@@ -1,12 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import { HiHome, HiClipboardList, HiCalendar, HiCheckCircle, HiChartBar, HiCog } from 'react-icons/hi';
+import { HiHome, HiClipboardList, HiCalendar, HiCheckCircle, HiChartBar, HiCog, HiUser } from 'react-icons/hi';
 
 export default function Sidebar() {
 	const item = ({ isActive }) =>
 		`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors ${isActive ? 'bg-white/5 text-primary' : 'text-text/80 hover:bg-white/5'}`;
 	return (
 		<aside className="card p-3 sticky top-20">
-			<div className="text-xs uppercase tracking-wider text-muted px-2 pb-2">Navigation</div>
 			<nav className="space-y-1">
 				<NavLink to="/" className={item}>
 					<HiHome className="w-5 h-5" />
@@ -31,6 +30,10 @@ export default function Sidebar() {
 				<NavLink to="/settings" className={item}>
 					<HiCog className="w-5 h-5" />
 					<span>Settings</span>
+				</NavLink>
+				<NavLink to="/profile" className={item}>
+					<HiUser className="w-5 h-5" />
+					<span>Profile</span>
 				</NavLink>
 			</nav>
 		</aside>

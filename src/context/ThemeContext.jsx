@@ -7,10 +7,18 @@ export function ThemeProvider({ children }) {
 
 	useEffect(() => {
 		localStorage.setItem('theme', theme);
-		if (theme === 'dark') {
-			document.documentElement.classList.add('dark');
+		// Remove all theme classes
+		document.documentElement.classList.remove('dark', 'light', 'amoled');
+		// Add the current theme class
+		document.documentElement.classList.add(theme);
+		
+		// Update body background for amoled
+		if (theme === 'amoled') {
+			document.body.style.backgroundColor = '#000000';
+		} else if (theme === 'light') {
+			document.body.style.backgroundColor = '#ffffff';
 		} else {
-			document.documentElement.classList.remove('dark');
+			document.body.style.backgroundColor = '#0a0a0a';
 		}
 	}, [theme]);
 

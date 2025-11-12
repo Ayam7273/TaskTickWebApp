@@ -1,55 +1,93 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../components/ui/Card.jsx';
 import Toggle from '../../components/ui/Toggle.jsx';
 import { useTheme } from '../../context/ThemeContext.jsx';
-import { useState } from 'react';
-import Modal from '../../components/ui/Modal.jsx';
-import Button from '../../components/ui/Button.jsx';
+import { useSettings } from '../../context/SettingsContext.jsx';
+import ThemeModal from '../../components/settings/ThemeModal.jsx';
+import SleepTimeModal from '../../components/settings/SleepTimeModal.jsx';
+import TimePickerModal from '../../components/settings/TimePickerModal.jsx';
+import SwipeActionModal from '../../components/settings/SwipeActionModal.jsx';
+import { HiInformationCircle, HiSun, HiMoon, HiClock, HiHand, HiArrowRight } from 'react-icons/hi';
 
 export default function SettingsPage() {
 	const { theme, toggle } = useTheme();
+	const { settings } = useSettings();
 	const [openTheme, setOpenTheme] = useState(false);
+	const [openSleepTime, setOpenSleepTime] = useState(false);
 	const [openPicker, setOpenPicker] = useState(false);
 	const [openSwipe, setOpenSwipe] = useState(false);
 
 	return (
 		<div className="space-y-6">
 			<div className="heading-xl">Settings</div>
+
+			{/* About Section */}
 			<Card className="p-4">
-				<div className="heading-lg mb-4">General Settings</div>
-				<div className="divide-y divide-white/5">
-					<button className="w-full text-left py-3 hover:bg-white/5 rounded-lg px-2" onClick={() => setOpenTheme(true)}>Theme</button>
-					<button className="w-full text-left py-3 hover:bg-white/5 rounded-lg px-2" onClick={() => setOpenPicker(true)}>Time Picker</button>
-					<button className="w-full text-left py-3 hover:bg-white/5 rounded-lg px-2" onClick={() => setOpenSwipe(true)}>Swipe Action</button>
-				</div>
+				<Link
+					to="/about"
+					className="flex items-center justify-between w-full text-left hover:bg-white/5 rounded-lg px-2 py-3 transition-colors"
+				>
+					<div className="flex items-center gap-3">
+						<HiInformationCircle className="w-5 h-5 text-muted" />
+						<span>About</span>
+					</div>
+					<HiArrowRight className="w-5 h-5 text-muted" />
+				</Link>
 			</Card>
 
-			<Card className="p-4">
-				<div className="flex items-center justify-between">
-					<div>Dark Mode</div>
-					<Toggle checked={theme === 'dark'} onChange={toggle} />
-				</div>
-			</Card>
+			{/* General Settings */}
+			<div>
+				<div className="text-sm text-muted mb-3 px-2">General Settings</div>
+				<Card className="p-0 overflow-hidden">
+					<button
+						className="w-full flex items-center justify-between px-4 py-3 hover:bg-white/5 transition-colors"
+						onClick={() => setOpenTheme(true)}
+					>
+					<div className="flex items-center gap-3">
+						<HiSun className="w-5 h-5 text-muted" />
+						<span>Theme</span>
+					</div>
+						<HiArrowRight className="w-5 h-5 text-muted" />
+					</button>
+					<button
+						className="w-full flex items-center justify-between px-4 py-3 hover:bg-white/5 transition-colors border-t border-white/5"
+						onClick={() => setOpenSleepTime(true)}
+					>
+						<div className="flex items-center gap-3">
+							<HiMoon className="w-5 h-5 text-muted" />
+							<span>Sleep Time</span>
+						</div>
+						<HiArrowRight className="w-5 h-5 text-muted" />
+					</button>
+					<button
+						className="w-full flex items-center justify-between px-4 py-3 hover:bg-white/5 transition-colors border-t border-white/5"
+						onClick={() => setOpenPicker(true)}
+					>
+						<div className="flex items-center gap-3">
+							<HiClock className="w-5 h-5 text-muted" />
+							<span>Time Picker</span>
+						</div>
+						<HiArrowRight className="w-5 h-5 text-muted" />
+					</button>
+					<button
+						className="w-full flex items-center justify-between px-4 py-3 hover:bg-white/5 transition-colors border-t border-white/5"
+						onClick={() => setOpenSwipe(true)}
+					>
+						<div className="flex items-center gap-3">
+							<HiHand className="w-5 h-5 text-muted" />
+							<span>Swipe Action</span>
+						</div>
+						<HiArrowRight className="w-5 h-5 text-muted" />
+					</button>
+				</Card>
+			</div>
 
-			<Modal open={openTheme} onClose={() => setOpenTheme(false)} title="Choose Theme">
-				<div className="grid grid-cols-2 gap-3">
-					<Button className="w-full">Light</Button>
-					<Button className="w-full" variant="ghost">Dark</Button>
-					<Button className="w-full" variant="ghost">Amoled</Button>
-					<Button className="w-full" variant="ghost">Material You</Button>
-				</div>
-			</Modal>
-
-			<Modal open={openPicker} onClose={() => setOpenPicker(false)} title="Choose Time Picker Style">
-				<p className="text-muted">Scroll and Clock styles (placeholder).</p>
-			</Modal>
-
-			<Modal open={openSwipe} onClose={() => setOpenSwipe(false)} title="Choose Swipe Action">
-				<div className="grid grid-cols-3 gap-3">
-					<Button className="w-full" variant="ghost">None</Button>
-					<Button className="w-full" variant="danger">Delete</Button>
-					<Button className="w-full">Complete</Button>
-				</div>
-			</Modal>
+			{/* Modals */}
+			<ThemeModal isOpen={openTheme} onClose={() => setOpenTheme(false)} />
+			<SleepTimeModal isOpen={openSleepTime} onClose={() => setOpenSleepTime(false)} />
+			<TimePickerModal isOpen={openPicker} onClose={() => setOpenPicker(false)} />
+			<SwipeActionModal isOpen={openSwipe} onClose={() => setOpenSwipe(false)} />
 		</div>
 	);
 }
